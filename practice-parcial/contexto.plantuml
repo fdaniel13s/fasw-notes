@@ -1,0 +1,21 @@
+@startuml context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama de Contexto para la Plataforma de Ciberseguridad
+
+Person(estudiante, "Estudiante", "Usuario de la plataforma de entrenamiento")
+Person(analista, "Analista de Seguridad", "Administra y configura la plataforma")
+
+System(plataforma, "Plataforma de Ciberseguridad", "Proporciona entrenamiento y monitoreo de seguridad")
+
+System_Ext(internet, "Tráfico de Internet", "Fuente de datos para análisis")
+System_Ext(sec_providers, "Proveedores de Seguridad Externos", "Fuente de actualizaciones de seguridad")
+
+Rel(estudiante, plataforma, "Usa para entrenamiento", "HTTPS")
+Rel(analista, plataforma, "Administra y configura", "HTTPS")
+Rel(internet, plataforma, "Envía tráfico para análisis", "TCP/IP")
+Rel(sec_providers, plataforma, "Proporciona actualizaciones de seguridad", "API")
+
+@enduml

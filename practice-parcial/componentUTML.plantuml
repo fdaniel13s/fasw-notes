@@ -1,0 +1,41 @@
+@startuml UTM
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama de Componentes para el Servicio UTM
+
+Container_Boundary(utm, "Servicio UTM") {
+    Component(traffic_analyzer, "Analizador de Tráfico", "Java", "Inspecciona y analiza el tráfico entrante")
+    Component(device_manager, "Administrador de Dispositivos", "Java", "Gestiona el catálogo de dispositivos")
+    Component(policy_manager, "Gestor de Políticas y Objetos", "Java", "Aplica reglas al tráfico")
+    Component(wifi_manager, "Gestor de Acceso WiFi", "Java", "Gestiona redes y reglas WiFi")
+    Component(antivirus, "Antivirus de Red", "Java", "Examina paquetes en busca de virus")
+    Component(vpn_manager, "Gestor de VPN", "Java", "Gestiona conexiones VPN")
+    Component(ai_engine, "Motor de IA", "Python", "Aplica algoritmos de IA para respuesta rápida")
+    Component(proxy_server, "Servidor Proxy", "Java", "Enmascara IPs locales")
+    Component(log_manager, "Gestor de Logs", "Java", "Registra eventos de seguridad")
+    Component(config_reader, "Lector de Configuración", "Java", "Lee la configuración del servicio")
+}
+
+System_Ext(esb, "ESB")
+System_Ext(honeypot, "Servicio HoneyPot")
+System_Ext(noc_soc, "Servicio NOC-SOC")
+System_Ext(config_service, "Servicio de Configuración")
+System_Ext(log_service, "Servicio de LOG")
+
+Rel(esb, traffic_analyzer, "Envía tráfico para análisis", "Mensajes")
+Rel(honeypot, traffic_analyzer, "Envía información de amenazas", "Internal")
+Rel(traffic_analyzer, device_manager, "Consulta información de dispositivos", "Internal")
+Rel(traffic_analyzer, policy_manager, "Aplica políticas", "Internal")
+Rel(traffic_analyzer, wifi_manager, "Consulta reglas WiFi", "Internal")
+Rel(traffic_analyzer, antivirus, "Escanea paquetes", "Internal")
+Rel(traffic_analyzer, vpn_manager, "Gestiona conexiones VPN", "Internal")
+Rel(traffic_analyzer, ai_engine, "Solicita análisis de IA", "Internal")
+Rel(traffic_analyzer, proxy_server, "Enmascara IPs", "Internal")
+Rel(traffic_analyzer, log_manager, "Registra eventos", "Internal")
+Rel(noc_soc, policy_manager, "Actualiza reglas", "HTTPS")
+Rel(log_manager, log_service, "Envía logs", "Syslog")
+Rel(config_reader, config_service, "Lee configuración", "HTTPS")
+
+@enduml

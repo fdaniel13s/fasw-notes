@@ -1,0 +1,36 @@
+@startuml Honey
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama de Componentes para el Servicio HoneyPot
+
+Container_Boundary(honeypot, "Servicio HoneyPot") {
+    Component(traffic_receiver, "Receptor de Tráfico", "Python Flask", "Recibe y procesa el tráfico entrante")
+    Component(web_emulator, "Emulador Web", "Python, Nginx", "Simula una aplicación web en el puerto 80")
+    Component(webservice_emulator, "Emulador de WebService", "Python Flask", "Simula un servicio web REST/SOAP en el puerto 8080")
+    Component(db_emulator, "Emulador de Base de Datos", "Python, SQLite", "Simula una base de datos en el puerto 5000")
+    Component(custom_service, "Servicio Personalizado", "Python", "Abre un socket en un puerto especificado")
+    Component(log_manager, "Gestor de Logs", "Python", "Registra las interacciones de los atacantes")
+    Component(config_reader, "Lector de Configuración", "Python", "Lee la configuración del servicio")
+}
+
+System_Ext(api_gateway, "API Gateway")
+System_Ext(utm, "Servicio UTM")
+System_Ext(config_service, "Servicio de Configuración")
+System_Ext(log_service, "Servicio de LOG")
+
+Rel(api_gateway, traffic_receiver, "Envía tráfico", "HTTP/TCP")
+Rel(traffic_receiver, web_emulator, "Dirige tráfico web", "Internal")
+Rel(traffic_receiver, webservice_emulator, "Dirige tráfico de servicios web", "Internal")
+Rel(traffic_receiver, db_emulator, "Dirige tráfico de base de datos", "Internal")
+Rel(traffic_receiver, custom_service, "Dirige tráfico personalizado", "Internal")
+Rel(web_emulator, log_manager, "Registra interacciones", "Internal")
+Rel(webservice_emulator, log_manager, "Registra interacciones", "Internal")
+Rel(db_emulator, log_manager, "Registra interacciones", "Internal")
+Rel(custom_service, log_manager, "Registra interacciones", "Internal")
+Rel(log_manager, log_service, "Envía logs", "Syslog")
+Rel(config_reader, config_service, "Lee configuración", "HTTPS")
+Rel(honeypot, utm, "Envía información de amenazas", "Internal")
+
+@enduml

@@ -1,0 +1,44 @@
+@startuml name
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama de Contenedores para la Plataforma de Ciberseguridad
+
+Person(estudiante, "Estudiante", "Usuario de la plataforma de entrenamiento")
+Person(analista, "Analista de Seguridad", "Administra y configura la plataforma")
+
+System_Boundary(plataforma, "Plataforma de Ciberseguridad") {
+    Container(web_app, "Aplicación Web de Administración", "JavaScript, React", "Permite configurar servicios y consultar tráfico")
+    Container(api_gateway, "API Gateway", "Node.js", "Dirige el tráfico hacia los servicios señuelos")
+    Container(esb, "ESB", "Apache Camel", "Procesa grandes cantidades de información en forma de mensajes")
+    Container(utm, "Servicios UTM", "Java", "Administración unificada de amenazas")
+    Container(honeypot, "Servicios HoneyPot", "Python", "Software señuelo para atraer y analizar ataques")
+    Container(noc_soc, "Servicios NOC-SOC", "Go", "Servicios de alerta y actualización")
+    Container(log_service, "Servicios de LOG", "ELK Stack", "Almacena y procesa logs")
+    Container(config_service, "Servicio de Configuración", "Spring Boot", "Gestiona la configuración de la plataforma")
+    ContainerDb(db, "Base de Datos", "Derby", "Almacena configuración y datos operativos")
+    ContainerDb(file_system, "Sistema de Archivos", "Linux FS", "Almacena logs y archivos de tráfico detectado")
+}
+
+System_Ext(internet, "Tráfico de Internet", "Fuente de datos para análisis")
+System_Ext(sec_providers, "Proveedores de Seguridad Externos", "Fuente de actualizaciones de seguridad")
+
+Rel(estudiante, web_app, "Usa", "HTTPS")
+Rel(analista, web_app, "Administra", "HTTPS")
+Rel(internet, api_gateway, "Envía tráfico", "TCP/IP")
+Rel(sec_providers, noc_soc, "Proporciona actualizaciones", "API")
+
+Rel(web_app, api_gateway, "Usa", "JSON/HTTPS")
+Rel(api_gateway, esb, "Enruta mensajes", "JSON/HTTPS")
+Rel(esb, utm, "Envía tráfico para análisis", "Mensajes")
+Rel(esb, honeypot, "Envía tráfico señuelo", "Mensajes")
+Rel(utm, log_service, "Registra eventos", "Syslog")
+Rel(honeypot, log_service, "Registra interacciones", "Syslog")
+Rel(noc_soc, utm, "Actualiza reglas", "Mensajes")
+Rel(utm, config_service, "Lee configuración", "JSON/HTTPS")
+Rel(honeypot, config_service, "Lee configuración", "JSON/HTTPS")
+Rel(config_service, db, "Lee/Escribe datos", "SQL")
+Rel(log_service, file_system, "Escribe logs", "File I/O")
+
+@enduml

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>c4-model.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<style>
+  body {
+    background-color: #282c34; /* Obsidian background color */
+    color: #ffffff; /* White text color */
+  }
+  a {
+    color: #61dafb; /* Light blue color for links */
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body class="font-sans p-6">
+  <h1 class="text-3xl font-bold mb-4" id="c4-model---all-you-need-to-know---by-fernando-quispe">C4 Model - All you need to know - by <a href="https://linkdln.com/in/fernando-quispe">Fernando Quispe</a></h1>
+  <h2 class="text-2xl font-semibold mb-2" id="%C2%BFwhat-is-c4-model">¿What is C4 Model?</h2>
+  <p class="mb-4">The C4 model is an &quot;abstraction-first&quot; approach to diagramming software architecture, based upon abstractions that reflect how software architects and developers think about and build software. The small set of abstractions and diagram types makes the C4 model easy to learn and use.</p>
+  <h2 class="text-2xl font-semibold mb-2" id="%C2%BFwhy-you-should-use-c4-model">¿Why you should use C4 Model?</h2>
+  <p class="mb-4">The C4 model is a way to create a set of maps that describe the architecture of a software system. The C4 model was created as a way to help software development teams describe and communicate software architecture, both during up-front design sessions and when retrospectively documenting an existing codebase. For example, the C4 model can be used to describe the static structure of a system in terms of containers, components, and code classes, and to describe the dynamic behavior of a system in terms of collaborations between components and code classes.</p>
+  <h2 class="text-2xl font-semibold mb-2" id="%C2%BFwhat-is-the-difference-between-c4-model-and-any-other-diagram-representing-software-architecture">¿What is the difference between C4 Model and any other diagram representing software architecture?</h2>
+  <ul class="list-disc list-inside mb-4">
+    <li>C4 Model is an &quot;abstraction-first&quot; approach to diagramming software architecture.</li>
+    <li>Have consistent notation (colour coding, shapes, line styles, etc)</li>
+    <li>Don't have ambiguous names</li>
+    <li>Don't have unlabelled relationships</li>
+    <li>The terminology is consistent</li>
+    <li>The technology is present but not the focus</li>
+  </ul>
+  <h2 class="text-2xl font-semibold mb-2" id="key-concepts">Key Concepts</h2>
+  <ul class="list-disc list-inside mb-4">
+    <li>C4 Model can be used in two fronts, during up-front design sessions and when retrospectively documenting an existing codebase.</li>
+    <li>Have various levels of detail, from a high-level overview down to the code level.</li>
+    <li>A <strong>System Context</strong> diagram provides a starting point, showing how the software system in scope fits into the world around it.</li>
+    <li>A <strong>Container diagram</strong> zooms into the software system in scope, showing the high-level technical building blocks.</li>
+    <li>A <strong>Component diagram</strong> zooms into an individual container, showing the components inside it. Like individual container it is possible have more than one component diagram.</li>
+    <li>A <strong>Code diagram</strong> can be used to zoom into an individual component, showing how that component is implemented.</li>
+    <li>It is important that you know that is not necessary to create all the diagrams, you can create only the necessary ones.</li>
+  </ul>
+  <h2 class="text-2xl font-semibold mb-2" id="concepts">Concepts</h2>
+  <ul class="list-disc list-inside mb-4">
+    <li>Person: A person represents one of the human users of your software system (e.g. actors, roles, personas, etc).</li>
+    <li>Software System: A software system is the highest level of abstraction and describes something that delivers value to its users, whether they are human or not. This includes the software system you are modelling, and the other software systems upon which your software system depends.</li>
+    <li>Container: Represents an application or a data store. A container is something that needs to be running in order for the overall software system to work. Examples of containers include server-side web applications, mobile apps, desktop applications, databases, file systems, message queues, etc.</li>
+    <li>Component: In C4 Model, is grouping of related functionality encapsulated behind a well-defined interface. In this context, components are not separately deployable units.</li>
+  </ul>
+  <h2 class="text-2xl font-semibold mb-2" id="diagrams">Diagrams</h2>
+  <h3 class="text-xl font-semibold mb-2" id="system-context-diagram">System Context Diagram</h3>
+  <p class="mb-4">Detail isn't important here as this is your zoomed out view showing a big picture of the system landscape. The focus should be on people (actors, roles, personas, etc) and software systems rather than technologies, protocols and other low-level details.</p>
+  <h3 class="text-xl font-semibold mb-2" id="container-diagram">Container Diagram</h3>
+  <p class="mb-4">Shows the high-level shape of the software architecture and how responsibilities are distributed across it. It also shows the major technology choices and how the containers communicate with one another. It's a simple, high-level technology focussed diagram that is useful for software developers and support/operations staff alike.</p>
+  <h3 class="text-xl font-semibold mb-2" id="component-diagram">Component Diagram</h3>
+  <p class="mb-4">The Component diagram shows how a container is made up of a number of &quot;components&quot;, what each of those components are, their responsibilities and the technology/implementation details. It can be connected with containers, people, and other software.</p>
+  <h3 class="text-xl font-semibold mb-2" id="code-diagram">Code Diagram</h3>
+  <p class="mb-4">The Code diagram shows how a component is implemented. It shows the structure of the codebase and dependencies between classes, interfaces, and other code elements.</p>
+  <h2 class="text-2xl font-semibold mb-2" id="bibliography">Bibliography</h2>
+  <ul class="list-disc list-inside mb-4">
+    <li><a href="https://c4model.com/">C4 Model by Simon Brown</a></li>
+  </ul>
+</body>
+</html>
